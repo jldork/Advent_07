@@ -8,5 +8,6 @@ test('Checker can determine if IPv7 can support TLS', function (assert) {
     assert.equal(supports_tls('ioxxoj[asdfgh]zxcvbn'), true);
     assert.equal(supports_tls('ioxxoj[asdfgh]zxcvbn[abba]asdf'), false);
     assert.equal(supports_tls('asdf[asdfgh]abba[asdf]asdf'), true);
+    assert.equal(supports_tls('asdf[asdfgh]fdes'), false);
     assert.end();
 });

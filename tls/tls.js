@@ -16,6 +16,10 @@ var is_abba = function(string) {
     return (palindrome && diff_digits)
 }
 
+var contains_abba = function(list) {
+    return array_4chars(list).some(is_abba)
+}
+
 var abba_in_brackets = function(string) {
     var beginnings = [];
     var endings = [];
@@ -27,7 +31,8 @@ var abba_in_brackets = function(string) {
     var bracketed_abba = []
     for( var i=0; i < endings.length; i++){
         var bracketed = string.slice(beginnings[i], endings[i])
-        bracketed_abba.push(array_4chars(bracketed).some(is_abba))
+        console.log("BRACKETED: ", bracketed, array_4chars(bracketed).some(is_abba))
+        bracketed_abba.push(contains_abba(bracketed))
     }
     
 
@@ -35,8 +40,13 @@ var abba_in_brackets = function(string) {
 }
 
 var tls = function(ip) {
-    var abba_in_ip = array_4chars(ip.replace(/(\[.*?\])/,"")).some(is_abba); 
-    return abba_in_brackets(ip) ? false : abba_in_ip
+    var non_brackets = ip.replace(/(\[.*?\])/,"|").split("|")
+    var non_brackets_abba = []
+    for (var i=0;i<non_brackets.length;i++){
+        non_brackets_abba.push(contains_abba(non_brackets[i]))
+    }
+    
+    return abba_in_brackets(ip) ? false : non_brackets_abba.any()
 };
 
 module.exports = tls;
