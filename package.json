@@ -1,0 +1,15 @@
+{
+  "name": "tls_support_checking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tls.js",
+  "scripts": {
+    "test": "tape test_*.js | faucet"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "tape": "^4.6.3"
+  }
+}
