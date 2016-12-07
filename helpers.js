@@ -15,7 +15,6 @@ var out_of_brackets = function(ip, callback){
 }
 
 var in_brackets = function(string, callback) {
-    console.log(string);
     var beginnings = [];
     var endings = [];
     for( var i=0; i < string.length; i++ ) {
