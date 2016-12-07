@@ -4,7 +4,7 @@
   "description": "",
   "main": "tls.js",
   "scripts": {
-    "test": "tape tls/test_*.js | faucet"
+    "test": "tape **/test_*.js | faucet"
   },
   "author": "",
   "license": "ISC",

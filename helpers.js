@@ -2,7 +2,20 @@ Array.prototype.any = function(func) {
    return this.some(func || function(x) { return x });
 }
 
+
+var out_of_brackets = function(ip, callback){
+    var non_brackets = ip.replace(/(\[.*?\])/,"|").split("|")
+    var non_brackets_aba = []
+    for (var i=0;i<non_brackets.length;i++){
+        if (callback(non_brackets[i])){
+            non_brackets_aba.push(non_brackets[i])
+        }
+    }
+    return non_brackets_aba
+}
+
 var in_brackets = function(string, callback) {
+    console.log(string);
     var beginnings = [];
     var endings = [];
     for( var i=0; i < string.length; i++ ) {
@@ -13,10 +26,12 @@ var in_brackets = function(string, callback) {
     var bracketed_abba = []
     for( var i=0; i < endings.length; i++){
         var bracketed = string.slice(beginnings[i], endings[i])
-        bracketed_abba.push(callback(bracketed))
+        if (callback(bracketed)){
+            bracketed_abba.push(bracketed)
+        }
     }
     
-    return bracketed_abba.any()
+    return bracketed_abba
 };
 
 var str_permutations = function(num_chars, string) {
@@ -35,6 +50,7 @@ var is_diff_palindrome = function(string) {
 
 var helpers = {
     in_brackets : in_brackets,
+    out_of_brackets: out_of_brackets,
     str_permutations : str_permutations,
     is_diff_palindrome : is_diff_palindrome
 };
