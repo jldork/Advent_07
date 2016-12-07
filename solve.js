@@ -1,4 +1,4 @@
-var supports_tls = require('./tls');
+var supports_tls = require('./tls/tls');
 var fs = require('fs');
 
 fs.readFile('./input.txt', 'utf8', function (err,ips) {
