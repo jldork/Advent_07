@@ -2,7 +2,14 @@ var {in_brackets, out_of_brackets, str_permutations, is_diff_palindrome} = requi
 
 var ssl = function(ip) {
     var contains_aba = function(list) {
-        return str_permutations(3, list).some(is_diff_palindrome)
+        permutations = str_permutations(3, list)
+        results = []
+        for (var i=0; i< permutations.length; i++){
+            if (is_diff_palindrome(permutations[i])){
+                results.push(permutations[i])
+            }
+        }
+        return results
     }
 
     aba_oob = out_of_brackets(ip, contains_aba)
@@ -15,7 +22,7 @@ var ssl = function(ip) {
             reverses.push(match);
         }
     }
-    
+
     return reverses.any()
 };
 

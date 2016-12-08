@@ -7,8 +7,9 @@ var out_of_brackets = function(ip, callback){
     var non_brackets = ip.replace(/(\[.*?\])/,"|").split("|")
     var non_brackets_aba = []
     for (var i=0;i<non_brackets.length;i++){
-        if (callback(non_brackets[i])){
-            non_brackets_aba.push(non_brackets[i])
+        var matches = callback(non_brackets[i])
+        if (matches.length > 0){
+            non_brackets_aba = non_brackets_aba.concat(matches)
         }
     }
     return non_brackets_aba
@@ -25,7 +26,7 @@ var in_brackets = function(string, callback) {
     var bracketed_abba = []
     for( var i=0; i < endings.length; i++){
         var bracketed = string.slice(beginnings[i], endings[i])
-        if (callback(bracketed)){
+        if (callback(bracketed).length > 0){
             bracketed_abba.push(bracketed)
         }
     }
