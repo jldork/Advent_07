@@ -4,7 +4,8 @@ Array.prototype.any = function(func) {
 
 
 var out_of_brackets = function(ip, callback){
-    var non_brackets = ip.replace(/(\[.*?\])/,"|").split("|")
+    var bracket_regex = new RegExp(/(\[.*?\])/, 'g')
+    var non_brackets = ip.replace(bracket_regex ,"|").split("|")
     var non_brackets_aba = []
     for (var i=0;i<non_brackets.length;i++){
         var matches = callback(non_brackets[i])
@@ -26,11 +27,11 @@ var in_brackets = function(string, callback) {
     var bracketed_abba = []
     for( var i=0; i < endings.length; i++){
         var bracketed = string.slice(beginnings[i], endings[i])
-        if (callback(bracketed).length > 0){
-            bracketed_abba.push(bracketed)
+        var aba_segment = callback(bracketed)
+        if (aba_segment.length > 0){
+            bracketed_abba = bracketed_abba.concat(aba_segment)
         }
     }
-    
     return bracketed_abba
 };
 
